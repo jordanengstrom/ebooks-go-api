@@ -37,7 +37,7 @@ func (h handler) UpdateBook(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(result.Error)
 	}
 
-	book.Author = updatedBook.Author
+	book.Authors = updatedBook.Authors
 	book.Title = updatedBook.Title
 	book.CopyrightYear = updatedBook.CopyrightYear
 	book.About = updatedBook.About

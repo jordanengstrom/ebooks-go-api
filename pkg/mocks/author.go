@@ -6,7 +6,7 @@ import (
 
 var Authors = []models.Author{
 	{
-		Id:         0,
+		// Id:         0,
 		FirstName:  "Jordan",
 		MiddleName: "Alan",
 		LastName:   "Engstrom",
