@@ -1,0 +1,65 @@
+-- CREATE TABLE book_authors (
+--     ID SERIAL PRIMARY KEY,
+--     author_id BIGINT REFERENCES authors(ID),
+--     book_id BIGINT REFERENCES books(ID)
+-- );
+
+-- INSERT INTO book_authors (
+--     author_id,
+--     book_id
+-- ) VALUES 
+--     (1, 1),
+--     (2, 2),
+--     (3, 3),
+--     (4, 4),
+--     (5, 4)
+
+--SELECT * FROM book_authors;
+
+--DROP TABLE IF EXISTS book_authors;-- CASCADE;
+
+-- CREATE TABLE books (
+--     ID SERIAL PRIMARY KEY,
+--     title VARCHAR(50),
+--     copyright_year INT,
+--     about TEXT
+-- );
+
+-- INSERT INTO books (
+--     title,
+--     copyright_year,
+--     about
+-- ) VALUES 
+--     ('This Side of Paradise', 1920, 'The Jazz Age was not just a drastic change in the cluture; it was a new dimension in consciousness. During the 1910s and 1920s America underwent a massive paradigm shift, a transition from an era of smug Victorian conformity and certainty to one of confusion and ambiguity called "modernism".'),
+--     ('The Alchemist', 1988, 'Paulo Coelho''s enchanting novel has inspired a devoted following around the world. This story, dazzling in its powerful simplicity and inspiring wisdom, is about an Andalusian shepherd boy named Santiago who travels from his homeland in Spain to the Egyptian desert in search of a treasure buried in the Pyramids.'),
+--     ('Dracula', 1897, 'Written in the form of letters, diary entries, and news bits, Dracula chronicles the vampire''s journey from his Transylvanian castle to the nighttime streets of London. There he searches for the blood he needs to stay alive - the blood of strong men and beautiful women - while his enemies plot to rid the world of his frightful power.'),
+--     ('Earth Materials', 2010, 'Minerals and rocks form the foundation of geologic studies. This new textbook has been written to address the needs of students at the increasing number of universities that have compressed separate mineralogy and petrology courses into a on or two semester earth materials course.');
+
+-- SELECT * FROM books;
+
+-- DROP TABLE IF EXISTS authors CASCADE;
+-- DROP TABLE IF EXISTS books CASCADE;
+
+
+-- CREATE TABLE authors (
+--     ID SERIAL PRIMARY KEY,
+--     first_name VARCHAR(50),
+--     middle_name VARCHAR(50),
+--     last_name VARCHAR(50)
+-- );
+
+-- INSERT INTO authors (
+--     first_name,
+--     middle_name,
+--     last_name
+-- ) VALUES
+--     ('F.', 'Scott', 'Fitzgerald'),
+--     ('Paulo', '', 'Coelho'),
+--     ('Bram', '', 'Stoker'),
+--     ('Kevio', '', 'Hefferan'),
+--     ('John', '', 'O''Brien');
+
+-- SELECT * FROM authors;
+
+
+-- CREATE EXTENSION IF NOT EXISTS "uuid-ossp";

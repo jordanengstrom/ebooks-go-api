@@ -1,3 +1,5 @@
+
+
 CREATE TABLE books (
     ID UUID DEFAULT uuid_generate_v4(),
     author_id UUID REFERENCES authors(ID),
