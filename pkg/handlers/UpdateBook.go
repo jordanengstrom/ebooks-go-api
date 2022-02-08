@@ -10,7 +10,6 @@ import (
 	"strconv"
 
 	"github.com/gorilla/mux"
-	"gorm.io/gorm/clause"
 )
 
 func (h handler) UpdateBook(w http.ResponseWriter, r *http.Request) {
@@ -33,7 +32,7 @@ func (h handler) UpdateBook(w http.ResponseWriter, r *http.Request) {
 	// 	fmt.Println(result.Error)
 	// }
 
-	if result := h.DB.Preload(clause.Associations).First(&book, id); result.Error != nil {
+	if result := h.DB.Preload("Authors").First(&book, id); result.Error != nil {
 		fmt.Println(result.Error)
 	}
 
@@ -42,8 +41,9 @@ func (h handler) UpdateBook(w http.ResponseWriter, r *http.Request) {
 	book.CopyrightYear = updatedBook.CopyrightYear
 	book.About = updatedBook.About
 
-	// h.DB.Save(&book)
-	// h.DB.Session(&gorm.Session{FullSjk;.aveAssociations: false}).Updates(&book)
+	h.DB.Model(&book).Association("Authors").Replace(updatedBook.Authors)
+	h.DB.Save(&book)
+	// h.DB.Session(&gorm.Session{FullSaveAssociations: false}).Updates(&book)
 
 	w.Header().Add("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
