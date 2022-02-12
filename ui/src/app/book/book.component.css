@@ -1,0 +1,41 @@
+.add-btn {
+    margin-top: 1rem;
+}
+
+.book-grid {
+    display: grid;
+    gap: 0.125rem;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+}
+
+.container {
+    max-width: 100rem;
+    margin-inline: auto;
+    padding-inline: 2rem;
+}
+
+.card {
+    aspect-ratio: 1 / 1.5;
+    box-shadow: 0 0.25rem 1rem rgb(0 0 0 / 0.1);
+    margin: 1rem;
+}
+
+.card-body {
+    background: white;
+    padding: 1rem;
+}
+
+.card-img-top {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit: fill;
+}
+
+.stacked {
+    display: flex;
+}
+
+.stacked > * {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+}

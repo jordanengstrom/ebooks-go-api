@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="book-grid">
+        <div class="card stacked text-center" *ngFor="let book of books">
+            <img src="{{ book.imgUrl }}" class="card-img-top" alt="cover art for {{ book.title }}">
+            <div class="card-body">
+                <h4 class="card-title">{{ book.title }}</h4>
+                <p class="card-text">{{ book.about }}</p>
+                <h5>Author(s)</h5>
+                <div *ngFor="let author of book.authors">
+                    <div *ngIf="author.middleName != '' else elseBlock">
+                        <span>{{ author.firstName }} {{ author.middleName }} {{ author.lastName }}</span>
+                    </div>
+                    <ng-template #elseBlock>
+                        <span>{{ author.firstName }} {{ author.lastName }}</span>
+                    </ng-template>
+                </div>
+                <a href="#" class="btn add-btn btn-primary">Add to Library</a>
+            </div>
+        </div>
+    </div>
+</div>
