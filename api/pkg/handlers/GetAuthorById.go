@@ -17,7 +17,7 @@ func (h handler) GetAuthorById(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Content-Type", "application/json")
 
 	if result := h.DB.First(&author, id); result.Error != nil {
-		log.Error("record with id=" + strconv.Itoa(id) + " not found")
+		log.Error("author record with id=" + strconv.Itoa(id) + " not found")
 		w.WriteHeader(http.StatusBadRequest)
 	} else {
 		w.WriteHeader(http.StatusOK)
