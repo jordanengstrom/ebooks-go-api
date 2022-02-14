@@ -10,6 +10,7 @@ import (
 )
 
 func (h handler) GetAuthors(w http.ResponseWriter, r *http.Request) {
+	log.Info("GET /api/authors")
 	var authors []models.Author
 	w.Header().Add("Content-Type", "application/json")
 

@@ -13,6 +13,7 @@ import (
 func (h handler) DeleteAuthor(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id, _ := strconv.Atoi(vars["id"])
+	log.Info("DELETE /api/authors/" + vars["id"])
 
 	var author models.Author
 	w.Header().Add("Content-Type", "application/json")

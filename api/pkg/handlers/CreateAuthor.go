@@ -11,6 +11,7 @@ import (
 )
 
 func (h handler) CreateAuthor(w http.ResponseWriter, r *http.Request) {
+	log.Info("POST /api/authors")
 	var validate *validator.Validate = validator.New()
 
 	defer r.Body.Close()

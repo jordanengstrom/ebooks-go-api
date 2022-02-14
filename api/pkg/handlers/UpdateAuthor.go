@@ -16,6 +16,7 @@ func (h handler) UpdateAuthor(w http.ResponseWriter, r *http.Request) {
 	var validate *validator.Validate = validator.New()
 	vars := mux.Vars(r)
 	id, _ := strconv.Atoi(vars["id"])
+	log.Info("PUT /api/authors/" + vars["id"])
 
 	defer r.Body.Close()
 	body, _ := ioutil.ReadAll(r.Body)
@@ -36,7 +37,7 @@ func (h handler) UpdateAuthor(w http.ResponseWriter, r *http.Request) {
 
 	var author models.Author
 	if result := h.DB.First(&author, id); result.Error != nil {
-		log.Error("author record with id=" + strconv.Itoa(id) + " not found")
+		log.Error("author record with id=" + vars["id"] + " not found")
 		w.WriteHeader(http.StatusBadRequest)
 	} else {
 		author.FirstName = updatedAuthor.FirstName
@@ -44,7 +45,7 @@ func (h handler) UpdateAuthor(w http.ResponseWriter, r *http.Request) {
 		author.LastName = updatedAuthor.LastName
 
 		h.DB.Save(&author)
-		log.Info("successfully updated author id=" + strconv.Itoa(id))
+		log.Info("successfully updated author id=" + vars["id"])
 		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode("Updated")
 	}
