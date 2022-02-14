@@ -33,7 +33,7 @@ func (h handler) CreateAuthor(w http.ResponseWriter, r *http.Request) {
 	if result := h.DB.Create(&author); result.Error != nil {
 		log.Error("unable to create author with the given data")
 		log.Error(result.Error)
-		w.WriteHeader(http.StatusBadRequest)
+		w.WriteHeader(http.StatusInternalServerError)
 	} else {
 		log.WithFields(log.Fields{"firstName": author.FirstName, "middleName": author.MiddleName, "lastName": author.LastName}).Info("successfully created author:")
 		w.WriteHeader(http.StatusCreated)

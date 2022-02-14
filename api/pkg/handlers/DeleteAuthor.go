@@ -3,11 +3,11 @@ package handlers
 import (
 	"ebooks/pkg/models"
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"strconv"
 
 	"github.com/gorilla/mux"
+	log "github.com/sirupsen/logrus"
 )
 
 func (h handler) DeleteAuthor(w http.ResponseWriter, r *http.Request) {
@@ -15,14 +15,15 @@ func (h handler) DeleteAuthor(w http.ResponseWriter, r *http.Request) {
 	id, _ := strconv.Atoi(vars["id"])
 
 	var author models.Author
+	w.Header().Add("Content-Type", "application/json")
 
 	if result := h.DB.First(&author, id); result.Error != nil {
-		fmt.Println(result.Error)
+		log.Error("unable to delete author with id=" + strconv.Itoa(id))
+		w.WriteHeader(http.StatusBadRequest)
+	} else {
+		h.DB.Delete(&author)
+		log.Info("successfully deleted author id=" + strconv.Itoa(id))
+		w.WriteHeader(http.StatusOK)
+		json.NewEncoder(w).Encode("Deleted")
 	}
-
-	h.DB.Delete(&author)
-
-	w.Header().Add("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode("Deleted")
 }

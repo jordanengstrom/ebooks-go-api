@@ -22,6 +22,6 @@ func (h handler) GetAuthorById(w http.ResponseWriter, r *http.Request) {
 	} else {
 		w.WriteHeader(http.StatusOK)
 		json.NewEncoder(w).Encode(author)
-		log.Info("successfully retrieved author #" + strconv.Itoa(id))
+		log.Info("successfully retrieved author id=" + strconv.Itoa(id))
 	}
 }
