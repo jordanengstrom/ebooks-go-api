@@ -3,18 +3,22 @@ package handlers
 import (
 	"ebooks/pkg/models"
 	"encoding/json"
-	"fmt"
 	"net/http"
+	"strconv"
+
+	log "github.com/sirupsen/logrus"
 )
 
 func (h handler) GetAuthors(w http.ResponseWriter, r *http.Request) {
 	var authors []models.Author
+	w.Header().Add("Content-Type", "application/json")
 
 	if result := h.DB.Find(&authors); result.Error != nil {
-		fmt.Println(result.Error)
+		log.Error("unable to retrieve authors")
+		w.WriteHeader(http.StatusInternalServerError)
+	} else {
+		w.WriteHeader(http.StatusOK)
+		json.NewEncoder(w).Encode(authors)
+		log.Info("successfully retrieved " + strconv.Itoa(len(authors)) + " authors")
 	}
-
-	w.Header().Add("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(authors)
 }
