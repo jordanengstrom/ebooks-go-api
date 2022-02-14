@@ -29,6 +29,8 @@ func main() {
 	subrouter.HandleFunc("/books/{id}", h.UpdateBook).Methods(http.MethodPut)
 	subrouter.HandleFunc("/books/{id}", h.DeleteBook).Methods(http.MethodDelete)
 
+	subrouter.HandleFunc("/ping", h.HealthCheck).Methods(http.MethodGet)
+
 	port := ":8080"
 	log.Printf("API is running on http://localhost%v\n", port)
 	http.ListenAndServe(port, router)
